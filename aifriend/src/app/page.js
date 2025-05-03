@@ -65,7 +65,7 @@ export default function Home() {
           className="w-full max-w-sm bg-white shadow-lg p-6 rounded-2xl text-center space-y-4"
         >
           <h1 className="text-xl font-semibold text-pink-600">
-            Hello there! 🌼 What's your first name?
+            Hello there! 🌼 What is your first name?
           </h1>
           <input
             type="text"
