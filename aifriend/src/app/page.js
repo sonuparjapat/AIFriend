@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Home() {
   const [name, setName] = useState('');
@@ -9,7 +9,11 @@ export default function Home() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false); // Added loading state
+  const bottomRef = useRef(null);
 
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
   const handleNameSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); // Start loading
@@ -86,7 +90,7 @@ export default function Home() {
       ) : (
         <div className="w-full max-w-lg bg-white rounded-xl shadow-xl p-4 flex flex-col h-[80vh]">
           <h2 className="text-2xl text-teal-600 font-bold mb-2 text-center">Hi Mohini (k haal hai)</h2>
-          <div className="flex-1 overflow-y-auto space-y-3 px-1">
+          <div className="flex-1 overflow-y-auto space-y-3 px-1 "  >
             {messages.map((msg, idx) => (
               <div
                 key={idx}
@@ -100,6 +104,7 @@ export default function Home() {
               </div>
             ))}
             {loading && <p className="text-teal-500">wait...</p>} {/* Display loading while waiting for AI response */}
+            <div ref={bottomRef} />
           </div>
           <div className="flex mt-4">
             <input
