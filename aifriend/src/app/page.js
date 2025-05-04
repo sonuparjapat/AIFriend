@@ -92,8 +92,8 @@ export default function Home() {
                 key={idx}
                 className={`p-3 rounded-lg max-w-[80%] ${
                   msg.sender === 'user'
-                    ? 'bg-teal-200 self-end text-right'
-                    : 'bg-teal-100 self-start text-left'
+                    ? 'bg-teal-200 self-end text-right text-black'
+                    : 'bg-teal-100 self-start text-left text-black'
                 }`}
               >
                 {msg.text}
