@@ -92,7 +92,7 @@ export default function Home() {
                 key={idx}
                 className={`p-3 rounded-lg max-w-[80%] ${
                   msg.sender === 'user'
-                    ? 'bg-teal-200 self-end text-right text-black'
+                    ? 'bg-pink-200 self-end text-right text-black'
                     : 'bg-teal-100 self-start text-left text-black'
                 }`}
               >
@@ -108,7 +108,7 @@ export default function Home() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               placeholder="Type your message..."
-              className="flex-1 border border-teal-300 rounded-l-lg p-2 focus:outline-none"
+              className="flex-1 border border-teal-300 text-black rounded-l-lg p-2 focus:outline-none"
             />
             <button
               onClick={handleSend}
