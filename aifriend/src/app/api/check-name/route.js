@@ -4,7 +4,7 @@ import {username} from "../../utils/username"
 export async function POST(req) {
   try {
     const { name } = await req.json(); // Get the name from the user
-
+console.log(username,"username")
     if (name.trim().toLowerCase() === `${username.toLowerCase()}`) {
       return NextResponse.json({ [`is${username}`]: true }, { status: 200 });
     } else {
