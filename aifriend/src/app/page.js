@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import {username} from "../../src/app/utils/username"
 
 export default function Home() {
   const [name, setName] = useState('');
@@ -25,8 +26,8 @@ export default function Home() {
     });
 
     const data = await res.json();
-
-    if (data.isMohini) {
+  
+    if (data[`is${username}`]) {
       setIsAllowed(true);
 
       // Get compliment as the first message
@@ -89,7 +90,7 @@ export default function Home() {
         </form>
       ) : (
         <div className="w-full max-w-lg bg-white rounded-xl shadow-xl p-4 flex flex-col h-[80vh]">
-          <h2 className="text-2xl text-teal-600 font-bold mb-2 text-center">Hi Mohini (k haal hai)</h2>
+          <h2 className="text-2xl text-teal-600 font-bold mb-2 text-center">Hi {username} (The Gorgeous Girl)</h2>
           <div className="flex-1 overflow-y-auto space-y-3 px-1 "  >
             {messages.map((msg, idx) => (
               <div

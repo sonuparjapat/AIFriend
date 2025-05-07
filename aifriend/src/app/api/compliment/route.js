@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
-
+import {username} from "../../utils/username"
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // Function to remove heart-related emojis
@@ -16,7 +16,7 @@ export async function GET(req) {
     });
 
     const prompt = `
-    Give a sweet, emotional, and uplifting compliment to a girl named Mohini. 
+    Give a sweet, emotional, and uplifting compliment to a girl named ${username}. 
     Talk to her like her best friend who truly cares about her. 
     Make her feel like the most unique and special person in the world. 
     Avoid romantic words like darling, babe, or love, and do not use any heart emojis. 

