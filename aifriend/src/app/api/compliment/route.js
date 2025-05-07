@@ -38,7 +38,7 @@ export async function GET(req) {
 
     return NextResponse.json({ compliment: text }, { status: 200 });
   } catch (error) {
-    console.error('Gemini API Error:', error);
+    console.error('Gemini API Error!..:', error);
     return NextResponse.json({ error: 'Failed to get AI response' }, { status: 500 });
   }
 }
